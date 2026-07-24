@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  2026 Theme Options:
+  
+  Option 1: Cyberpunk Blue (Deep Blue & Electric Cyan)
+  --brand-core: #0ea5e9; --brand-vibrant: #22d3ee; --brand-burgundy: #0c4a6e; --brand-dark: #082f49; --brand-light: #7dd3fc;
+  
+  Option 2: Emerald Aurora (Forest Green & Vibrant Teal)
+  --brand-core: #10b981; --brand-vibrant: #34d399; --brand-burgundy: #064e3b; --brand-dark: #06201a; --brand-light: #6ee7b7;
+  
+  Option 3: Retro Sunset (Deep Amber & Vivid Rose)
+  --brand-core: #f43f5e; --brand-vibrant: #fb923c; --brand-burgundy: #881337; --brand-dark: #4c0519; --brand-light: #fda4af;
+  
+  Option 4: Midnight Monochrome (Sleek Grays & Pure White Accents) - ACTIVE
+  --brand-core: #ffffff; --brand-vibrant: #94a3b8; --brand-burgundy: #1e293b; --brand-dark: #020617; --brand-light: #f8fafc;
+*/
+
+@layer base {
+  :root {
+    /* ZolTalk Brand Colors */
+    --zt-canvas: #E4E3E8;
+    --zt-bg: #FFFFFF;
+    --zt-card: #F3F3F5;
+    --zt-ink: #111111;
+    --zt-charcoal: #2E2E2E;
+    --zt-charcoal-muted: #3A3A3A;
+    --zt-black: #0C0C0C;
+    --zt-coral: #EE3826;
+    --zt-coral-dim: #D62E1D;
+    --zt-yellow: #F9D72C;
+    --zt-white: #FFFFFF;
+    --zt-line: #E7E5E9;
+    --zt-line-dark: #3F3F3F;
+
+    /* Keep existing tokens for compatibility */
+    --brand-core: #0f172a;
+    --brand-vibrant: #334155;
+    --brand-burgundy: #1e293b;
+    --brand-dark: #020617;
+    --brand-light: #e2e8f0;
+
+    --background-primary: #ffffff;
+    --background-secondary: #f8fafc;
+    --background-tertiary: #f1f5f9;
+    --background-elevated: #ffffff;
+
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #64748b;
+    --text-quaternary: #94a3b8;
+
+    --border-default: rgba(15, 23, 42, 0.08);
+    --border-light: rgba(15, 23, 42, 0.04);
+    --border-strong: rgba(15, 23, 42, 0.15);
+  }
+
+  .dark {
+    /* Midnight Monochrome Dark */
+    --brand-core: #ffffff;
+    --brand-vibrant: #94a3b8;
+    --brand-burgundy: #1e293b;
+    --brand-dark: #020617;
+    --brand-light: #f8fafc;
+
+    --background-primary: #020617;
+    --background-secondary: #0f172a;
+    --background-tertiary: #1e293b;
+    --background-elevated: #111827;
+
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #94a3b8;
+    --text-quaternary: #64748b;
+
+    --border-default: rgba(248, 250, 252, 0.1);
+    --border-light: rgba(248, 250, 252, 0.05);
+    --border-strong: rgba(248, 250, 252, 0.2);
+  }
+
+  body {
+    background: var(--background-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  /* Enhanced 2026 Glassmorphism */
+  .glass {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .glass-light {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+@layer utilities {
+  /* Shimmer/Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+  }
+
+  .glow-vibrant {
+    box-shadow: 0 0 25px rgba(217, 70, 239, 0.4);
+  }
+
+  /* Futuristic Gradient Text */
+  .text-gradient-2026 {
+    background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-soft {
+    background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  .animate-pulse-dot {
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+
+  .animate-ripple-ring {
+    animation: ripple-ring 1.6s ease-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px 6px rgba(234, 52, 40, 0.6), 0 0 60px 20px rgba(234, 52, 40, 0.3);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 30px 10px rgba(234, 52, 40, 0.8), 0 0 90px 30px rgba(234, 52, 40, 0.45);
+  }
+}
+
+@keyframes ripple-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
