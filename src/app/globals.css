@@ -161,6 +161,10 @@
   .ticker-marquee {
     animation: ticker-marquee-ltr 45s linear infinite;
   }
+
+  .animate-method-reveal {
+    animation: method-photo-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 }
 
 @keyframes float {
@@ -201,5 +205,14 @@
   }
   to {
     transform: translateX(0%);
+  }
+}
+
+@keyframes method-photo-reveal {
+  from {
+    transform: translateY(8%);
+  }
+  to {
+    transform: translateY(0);
   }
 }

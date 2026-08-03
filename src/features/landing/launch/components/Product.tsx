@@ -9,10 +9,21 @@ export function Product({ ctaLabel, waitlistUrl }: ProductProps) {
       className="relative w-full"
       style={{ aspectRatio: '1455/1400', background: '#000000', overflow: 'visible' }}
     >
-      <img
-        src="/launch/no-screen-guy.png"
-        alt="Man with an earbud in, smiling"
-        style={{ position: 'absolute', left: 0, bottom: 0, height: '115%', width: 'auto' }}
+      <video
+        src="/launch/no-screen-guy.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', maxWidth: 'none', objectFit: 'cover' }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 28%, rgba(0,0,0,0.15) 68%, rgba(0,0,0,0.65) 100%)',
+        }}
       />
       <img
         src="/launch/phone-hi.png"

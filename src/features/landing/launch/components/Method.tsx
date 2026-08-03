@@ -11,19 +11,19 @@ interface Step {
 
 const STEPS_DATA: Step[] = [
   {
-    img: '/launch/method-1.png',
+    img: '/launch/method-running-woman.png',
     title: 'Always on the move ↑',
     tag: 'FILTER',
     desc: "Anyone lying in bed, dropping in out of boredom, simply can't place a call to begin with.",
   },
   {
-    img: '/launch/method-2.png',
+    img: '/launch/method-cooking-woman.png',
     title: 'Always hands-free ↑',
     tag: 'TONE',
     desc: 'Talk that happens on the road, out on the street, is naturally everyday and wholesome.',
   },
   {
-    img: '/launch/method-3.png',
+    img: '/launch/method-man.png',
     title: '80/20 payout split',
     tag: 'PAYS →',
     desc: "The caller pays for the call's duration. It's split instantly — 80% to the receiver, 20% to the platform.",
@@ -31,15 +31,42 @@ const STEPS_DATA: Step[] = [
 ];
 
 const AUTO_ADVANCE_MS = 4000;
+const TRANSITION_MS = 600;
 
 export function Method() {
   const [active, setActive] = useState(0);
+  const [panelSide, setPanelSide] = useState<'left' | 'right'>('right');
+  const [photoIdx, setPhotoIdx] = useState(0);
+  const [photoSide, setPhotoSide] = useState<'left' | 'right'>('left');
+
+  const activeRef = useRef(active);
+  const panelSideRef = useRef(panelSide);
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
+  useEffect(() => {
+    panelSideRef.current = panelSide;
+  }, [panelSide]);
+
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const photoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const goTo = (i: number) => {
+    const nextPanelSide = panelSideRef.current === 'right' ? 'left' : 'right';
+    setActive(i);
+    setPanelSide(nextPanelSide);
+
+    if (photoTimerRef.current) clearTimeout(photoTimerRef.current);
+    photoTimerRef.current = setTimeout(() => {
+      setPhotoIdx(i);
+      setPhotoSide(nextPanelSide === 'right' ? 'left' : 'right');
+    }, TRANSITION_MS);
+  };
 
   const startTimer = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      setActive((a) => (a + 1) % STEPS_DATA.length);
+      goTo((activeRef.current + 1) % STEPS_DATA.length);
     }, AUTO_ADVANCE_MS);
   };
 
@@ -47,37 +74,52 @@ export function Method() {
     startTimer();
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
+      if (photoTimerRef.current) clearTimeout(photoTimerRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pick = (i: number) => {
-    setActive(i);
+    if (i === active) return;
+    goTo(i);
     startTimer();
   };
 
-  return (
-    <section style={{ background: '#000000', display: 'flex', alignItems: 'center', gap: '5%', padding: '4vw 5.2%' }}>
-      <div style={{ position: 'relative', width: '44.6%', flex: 'none', aspectRatio: '2013/2594', overflow: 'hidden' }}>
-        {STEPS_DATA.map((st, i) => (
-          <img
-            key={st.img}
-            src={st.img}
-            alt={st.title}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              transition: 'opacity 0.7s ease',
-              opacity: i === active ? 1 : 0,
-            }}
-          />
-        ))}
-      </div>
+  const textStep = STEPS_DATA[active];
+  const photoStep = STEPS_DATA[photoIdx];
 
-      <div style={{ flex: 1, minWidth: 0 }}>
+  return (
+    <section
+      style={{ position: 'relative', width: '100%', aspectRatio: '1500/1000', overflow: 'hidden', background: '#FF4A24' }}
+    >
+      <img
+        key={`${photoIdx}-${photoSide}`}
+        src={photoStep.img}
+        alt={photoStep.title}
+        className="animate-method-reveal"
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: photoSide === 'left' ? 0 : undefined,
+          right: photoSide === 'right' ? 0 : undefined,
+          height: '102%',
+          width: 'auto',
+        }}
+      />
+
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          left: panelSide === 'right' ? '50%' : '0%',
+          width: '50%',
+          background: '#000000',
+          padding: '4vw 3.5vw',
+          overflow: 'hidden',
+          transition: `left ${TRANSITION_MS}ms cubic-bezier(0.65, 0, 0.35, 1)`,
+        }}
+      >
         <div style={{ fontSize: 11, letterSpacing: '0.08em', color: '#8a8a8a', fontFamily: 'ui-monospace, Menlo, monospace' }}>
           // THE METHOD
         </div>
@@ -93,7 +135,7 @@ export function Method() {
         >
           The call,
           <br />
-          Hands-free.
+          hands-free.
         </h2>
         <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: '#777777', marginBottom: '1.8vw' }}>
           NO FEED. NO PROFILE. JUST A VOICE.
