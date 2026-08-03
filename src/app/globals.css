@@ -90,6 +90,15 @@
 }
 
 @layer components {
+  /* ZolTalk launch page (design_handoff_zoltalk_site) link reset */
+  .launch-page a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .launch-page a:hover {
+    opacity: 0.85;
+  }
+
   /* Enhanced 2026 Glassmorphism */
   .glass {
     background: rgba(15, 23, 42, 0.6);
@@ -148,6 +157,14 @@
   .animate-ripple-ring {
     animation: ripple-ring 1.6s ease-out infinite;
   }
+
+  .ticker-marquee {
+    animation: ticker-marquee-ltr 45s linear infinite;
+  }
+
+  .animate-method-reveal {
+    animation: method-photo-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 }
 
 @keyframes float {
@@ -179,5 +196,23 @@
   100% {
     transform: scale(2.6);
     opacity: 0;
+  }
+}
+
+@keyframes ticker-marquee-ltr {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes method-photo-reveal {
+  from {
+    transform: translateY(8%);
+  }
+  to {
+    transform: translateY(0);
   }
 }
