@@ -1,4 +1,4 @@
-import { helveticaWorld } from './font';
+import { abandon } from './font';
 import { Hero } from './components/Hero';
 import { Premise } from './components/Premise';
 import { Method } from './components/Method';
@@ -22,7 +22,7 @@ export function LaunchPage({
 }: LaunchPageProps) {
   return (
     <div
-      className={`${helveticaWorld.className} launch-page`}
+      className={`${abandon.className} launch-page`}
       style={{
         width: '100%',
         overflow: 'hidden',

@@ -6,8 +6,8 @@ import localFont from 'next/font/local';
 import { PulsingDot } from './PulsingDot';
 import { BRAND_LOCKUP_WIDTH } from './brandLockupWidth';
 
-const helveticaWorld = localFont({
-  src: '../../../shared/assets/fonts/Helvetica-World-Bold.otf',
+const abandon = localFont({
+  src: '../../../shared/assets/fonts/abandon/Abandon Bold.otf',
   weight: '700',
   style: 'normal',
   display: 'swap',
@@ -75,7 +75,7 @@ export function LoadingSequence({ progress, phase, onExpandComplete }: LoadingSe
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
-              className={`${helveticaWorld.className} text-4xl whitespace-nowrap`}
+              className={`${abandon.className} text-4xl whitespace-nowrap`}
             >
               <span style={{ color: '#000000' }}>Zol</span>
               <span style={{ color: '#ff4a24' }}>Talk</span>
