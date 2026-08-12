@@ -6,7 +6,7 @@ import * as useHeroSequenceModule from '@/features/landing/hooks/useHeroSequence
 // Mock the useHeroSequence hook
 let mockPhase: useHeroSequenceModule.Phase = 'day';
 let mockReveal: () => void = vi.fn();
-const mockHeadline: Headline = {
+const mockHeadline: useHeroSequenceModule.Headline = {
   title: 'Test Headline',
   source: 'Test Source',
   image: '/landing/test.png',

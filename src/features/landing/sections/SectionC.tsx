@@ -22,9 +22,9 @@ export function SectionC() {
           VISION
         </span>
         <blockquote className="font-zt-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.2] text-zt-ink mt-8">
-          "The goal isn't another notification.
+          &quot;The goal isn&apos;t another notification.
           <br />
-          It's one less reason to look down."
+          It&apos;s one less reason to look down.&quot;
         </blockquote>
         <p className="text-zt-ink/50 font-zt-body mt-8">
           — ZolTalk Team

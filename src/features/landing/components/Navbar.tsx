@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { MessagesSquare } from 'lucide-react';
 
 const navLinks = [
@@ -13,12 +14,12 @@ export function Navbar() {
   return (
     <header className="sticky top-3 z-50 mx-3 md:mx-6">
       <div className="flex items-center justify-between gap-4 rounded-full bg-zt-black px-4 py-3 md:px-6">
-        <a href="/" className="flex items-center gap-2 text-zt-white font-zt-display font-semibold text-lg shrink-0">
+        <Link href="/" className="flex items-center gap-2 text-zt-white font-zt-display font-semibold text-lg shrink-0">
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-zt-coral">
             <MessagesSquare className="h-4 w-4 text-zt-white" strokeWidth={2.5} />
           </span>
           ZolTalk
-        </a>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-1 rounded-full bg-zt-charcoal-muted px-2 py-1">
           {navLinks.map((link) => (
@@ -32,12 +33,12 @@ export function Navbar() {
           ))}
         </nav>
 
-        <a
+        <Link
           href="/#waitlist"
           className="shrink-0 rounded-full bg-zt-white text-zt-ink px-5 py-2.5 text-sm font-zt-utility font-medium hover:bg-zt-yellow transition-colors"
         >
           Get Early Access
-        </a>
+        </Link>
       </div>
     </header>
   );

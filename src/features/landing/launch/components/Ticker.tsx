@@ -67,9 +67,9 @@ export function Ticker({ show }: TickerProps) {
         }}
       >
         <span className="ticker-pill-full">
-          // TALK ANYWHERE, EVEN WITH YOUR HANDS FULL
+          {'// TALK ANYWHERE, EVEN WITH YOUR HANDS FULL'}
         </span>
-        <span className="ticker-pill-short">// TALK ANYWHERE</span>
+        <span className="ticker-pill-short">{'// TALK ANYWHERE'}</span>
       </div>
     </div>
   );

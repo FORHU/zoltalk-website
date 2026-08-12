@@ -123,7 +123,7 @@ export function Method() {
         }}
       >
         <div style={{ fontSize: 11, letterSpacing: '0.08em', color: '#8a8a8a', fontFamily: 'ui-monospace, Menlo, monospace' }}>
-          // THE METHOD
+          {'// THE METHOD'}
         </div>
         <h2
           className="method-title"

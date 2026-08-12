@@ -12,33 +12,54 @@ jobs:
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
     steps:
+      # Secrets are unavailable on fork PRs and unset until the repo is configured.
+      # Without them the Vercel CLI fails, so skip the deploy instead of failing the PR.
+      - name: Check Vercel credentials
+        id: creds
+        run: |
+          if [ -n "$VERCEL_TOKEN" ] && [ -n "$VERCEL_ORG_ID" ] && [ -n "$VERCEL_PROJECT_ID" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipping Vercel preview deploy — VERCEL_TOKEN, VERCEL_ORG_ID or VERCEL_PROJECT_ID is not set."
+          fi
+
       - name: Checkout repository
+        if: steps.creds.outputs.configured == 'true'
         uses: actions/checkout@v4
 
       - name: Install Vercel CLI
+        if: steps.creds.outputs.configured == 'true'
         run: npm install --global vercel@latest
 
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        if: steps.creds.outputs.configured == 'true'
+        run: vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
 
       - name: Build Project Artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        if: steps.creds.outputs.configured == 'true'
+        run: vercel build --token="$VERCEL_TOKEN"
 
       - name: Deploy to Vercel (Preview)
         id: deploy
+        if: steps.creds.outputs.configured == 'true'
         run: |
-          DEPLOY_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
-          echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_OUTPUT
+          DEPLOY_URL=$(vercel deploy --prebuilt --token="$VERCEL_TOKEN")
+          echo "DEPLOY_URL=$DEPLOY_URL" >> "$GITHUB_OUTPUT"
 
       - name: Comment preview URL on PR
+        if: steps.creds.outputs.configured == 'true'
         uses: actions/github-script@v7
+        env:
+          DEPLOY_URL: ${{ steps.deploy.outputs.DEPLOY_URL }}
         with:
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `## 🚀 Vercel Preview Deploy\n\n**Preview URL:** ${{ steps.deploy.outputs.DEPLOY_URL }}\n\nDeployed from commit \`${{ github.sha }}\``
+              body: `## 🚀 Vercel Preview Deploy\n\n**Preview URL:** ${process.env.DEPLOY_URL}\n\nDeployed from commit \`${context.sha}\``
             })
