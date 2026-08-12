@@ -10,7 +10,7 @@ export function SectionF() {
         {/* Newsletter */}
         <div className="text-center mb-16">
           <p className="text-zt-white/70 font-zt-body text-lg">
-            We share updates when there's something worth sharing.
+            We share updates when there&apos;s something worth sharing.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <input

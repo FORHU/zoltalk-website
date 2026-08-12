@@ -15,7 +15,7 @@ export function SuccessFactors() {
     <SectionCard bg="white" className="py-24 px-8">
       <div className="max-w-6xl mx-auto">
         <h2 className="font-zt-display font-semibold text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] text-zt-ink text-center">
-          Who it's for
+          Who it&apos;s for
         </h2>
 
         {/* Stats Row */}

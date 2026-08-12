@@ -216,3 +216,92 @@
     transform: translateY(0);
   }
 }
+
+/* Launch page — mobile layout.
+   These sections are styled with inline styles, so the overrides need !important. */
+
+.ticker-pill-short {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* Method: the desktop layout is a fixed-ratio stage with a half-width sliding
+     panel, which crops the copy on a phone. Stack photo over panel instead and
+     let the panel size to its content. */
+  .method-section {
+    aspect-ratio: auto !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .method-photo {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .method-panel {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    padding: 28px 20px 32px !important;
+    transition: none !important;
+  }
+
+  .method-title {
+    font-size: 32px !important;
+    margin: 0.5em 0 0.5em !important;
+  }
+
+  .method-sub {
+    margin-bottom: 18px !important;
+  }
+
+  .method-step {
+    padding: 14px 0 !important;
+    grid-template-columns: 2.2em 1fr auto !important;
+  }
+
+  .method-step-title {
+    font-size: 17px !important;
+  }
+
+  .method-step-desc {
+    font-size: 13px !important;
+  }
+
+  .method-foot {
+    padding-top: 14px !important;
+    font-size: 12px !important;
+  }
+
+  /* Ticker: shrink the badge so the marquee behind it stays visible. */
+  .ticker {
+    height: 40px !important;
+  }
+
+  .ticker-text {
+    font-size: 17px !important;
+  }
+
+  .ticker-pill {
+    font-size: 10px !important;
+    padding: 5px 10px !important;
+  }
+
+  .ticker-pill-full {
+    display: none;
+  }
+
+  .ticker-pill-short {
+    display: inline;
+  }
+}

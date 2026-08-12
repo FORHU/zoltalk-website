@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   Mic,
   EyeOff,
@@ -79,13 +80,13 @@ export function ProductDetails() {
     <>
       <SectionCard bg="dark" className="py-20 px-8">
         <div className="relative max-w-3xl mx-auto text-center">
-          <a
+          <Link
             href="/"
             className="inline-flex items-center gap-2 text-zt-white/60 hover:text-zt-white font-zt-body text-sm mb-8"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to ZolTalk
-          </a>
+          </Link>
           <h1 className="font-zt-display font-semibold text-[clamp(2.25rem,5vw,4rem)] leading-[1.05] text-zt-white">
             How ZolTalk is built
           </h1>
@@ -181,12 +182,12 @@ export function ProductDetails() {
           <h2 className="font-zt-display font-semibold text-[clamp(2rem,4vw,3rem)] leading-[1.1] text-zt-white">
             Want to be first to try it?
           </h2>
-          <a
+          <Link
             href="/#waitlist"
             className="mt-8 inline-block bg-zt-coral text-zt-white px-8 py-4 rounded-full font-zt-utility text-sm font-medium hover:bg-zt-coral-dim transition-colors"
           >
             Get Early Access
-          </a>
+          </Link>
         </div>
       </SectionCard>
     </>

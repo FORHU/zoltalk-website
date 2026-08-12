@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { QrCode } from 'lucide-react';
 
 const footerLinks = [
@@ -21,12 +22,12 @@ export function Footer() {
               </a>
             ))}
           </nav>
-          <a
+          <Link
             href="/#waitlist"
             className="shrink-0 rounded-full bg-zt-coral text-zt-white px-6 py-3 font-zt-utility text-sm font-medium hover:bg-zt-coral-dim transition-colors"
           >
             Get Early Access
-          </a>
+          </Link>
         </div>
         <a
           href="mailto:hello@zoltalk.app"

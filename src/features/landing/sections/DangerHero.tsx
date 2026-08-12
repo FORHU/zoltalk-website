@@ -18,7 +18,7 @@ export function DangerHero() {
           <AlertTriangle className="h-6 w-6 text-zt-white/80" strokeWidth={1.75} />
         </span>
         <h1 className="font-zt-display font-semibold text-[clamp(2.75rem,6vw,5.5rem)] leading-[1.05] text-zt-white">
-          Why can't we stop drowsy driving?
+          Why can&apos;t we stop drowsy driving?
         </h1>
         <p className="mt-6 text-zt-white/70 font-zt-body text-lg max-w-xl">
           ZolTalk connects you to another driver for a quick conversation the moment you start nodding off. Be first to try it.
@@ -87,7 +87,7 @@ export function DangerHero() {
         <div className="mt-20 bg-zt-charcoal-muted p-12 rounded-2xl">
           <p className="text-zt-white/80 font-zt-body text-xl leading-relaxed">
             96% of drivers say drowsy driving is very/extremely dangerous, but fewer than 30% think a drowsy driver is likely to get caught.
-            <span className="text-zt-white font-semibold"> This isn't a problem law enforcement can solve.</span>
+            <span className="text-zt-white font-semibold"> This isn&apos;t a problem law enforcement can solve.</span>
           </p>
           <p className="text-zt-white/50 font-zt-utility text-xs uppercase tracking-[0.08em] mt-4">
             AAA Foundation
