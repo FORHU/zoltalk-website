@@ -90,13 +90,14 @@ export function Method() {
 
   return (
     <section
+      className="method-section"
       style={{ position: 'relative', width: '100%', aspectRatio: '1500/1000', overflow: 'hidden', background: '#FF4A24' }}
     >
       <img
         key={`${photoIdx}-${photoSide}`}
         src={photoStep.img}
         alt={photoStep.title}
-        className="animate-method-reveal"
+        className="animate-method-reveal method-photo"
         style={{
           position: 'absolute',
           bottom: 0,
@@ -108,6 +109,7 @@ export function Method() {
       />
 
       <div
+        className="method-panel"
         style={{
           position: 'absolute',
           top: 0,
@@ -124,6 +126,7 @@ export function Method() {
           // THE METHOD
         </div>
         <h2
+          className="method-title"
           style={{
             color: '#FFFEE6',
             fontSize: 'clamp(26px, 3.9vw, 60px)',
@@ -137,7 +140,7 @@ export function Method() {
           <br />
           hands-free.
         </h2>
-        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: '#777777', marginBottom: '1.8vw' }}>
+        <div className="method-sub" style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: '#777777', marginBottom: '1.8vw' }}>
           NO FEED. NO PROFILE. JUST A VOICE.
         </div>
 
@@ -150,6 +153,7 @@ export function Method() {
             <div
               key={st.title}
               onClick={() => pick(i)}
+              className="method-step"
               style={{
                 cursor: 'pointer',
                 borderTop: '1px solid rgba(255,255,255,0.14)',
@@ -163,10 +167,14 @@ export function Method() {
                 0{i + 1}
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: 'clamp(14px, 1.35vw, 21px)', transition: 'color 0.3s', color: titleColor }}>
+                <div
+                  className="method-step-title"
+                  style={{ fontWeight: 700, fontSize: 'clamp(14px, 1.35vw, 21px)', transition: 'color 0.3s', color: titleColor }}
+                >
                   {st.title}
                 </div>
                 <div
+                  className="method-step-desc"
                   style={{
                     fontSize: 'clamp(11px, 0.95vw, 14px)',
                     lineHeight: 1.4,
@@ -195,7 +203,7 @@ export function Method() {
           );
         })}
 
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.14)', paddingTop: '1.4vw', fontSize: 'clamp(10px, 0.9vw, 13px)', color: '#666666' }}>
+        <div className="method-foot" style={{ borderTop: '1px solid rgba(255,255,255,0.14)', paddingTop: '1.4vw', fontSize: 'clamp(10px, 0.9vw, 13px)', color: '#666666' }}>
           Two switches flip at once — the call opens.
         </div>
       </div>

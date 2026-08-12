@@ -35,20 +35,18 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Boilerplate 2026",
-    default: "Boilerplate 2026 | Premium Next.js Starter",
+    template: "%s | ZolTalk",
+    default: "ZolTalk",
   },
-  description:
-    "Experience the next generation of development with Boilerplate 2026. A premium high-performance ecosystem.",
+  description: "A VOICE-FIRST SOCIAL PLATFORM WITH NO UI.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://boilerplate-2026.vercel.app",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://zoltalk-website.vercel.app",
   ),
   openGraph: {
-    title: "Boilerplate 2026 | Premium Starter",
-    description:
-      "Experience the next generation of development with Boilerplate 2026.",
-    url: "https://boilerplate-2026.vercel.app",
-    siteName: "Boilerplate 2026",
+    title: "ZolTalk",
+    description: "A VOICE-FIRST SOCIAL PLATFORM WITH NO UI.",
+    url: "https://zoltalk-website.vercel.app",
+    siteName: "ZolTalk",
     images: [
       {
         url: "/og-image.png",
@@ -61,9 +59,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Boilerplate 2026 | Premium Starter",
-    description:
-      "Experience the next generation of development with Boilerplate 2026.",
+    title: "ZolTalk",
+    description: "A VOICE-FIRST SOCIAL PLATFORM WITH NO UI.",
     images: ["/og-image.png"],
   },
   icons: {
