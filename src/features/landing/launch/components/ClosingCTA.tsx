@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Loader2, CheckCircle2 } from 'lucide-react';
-import { useJoinWaitlist } from '../../hooks/waitlist.hooks';
+import { useJoinWaitlist } from '@/features/landing/hooks/waitlist.hooks';
 
 interface ClosingCTAProps {
   ctaLabel: string;
