@@ -80,7 +80,7 @@ export function Hero({ start }: HeroProps) {
   const logoLeft = logoSide === 'left' ? '5%' : '90%';
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ aspectRatio: '598/364', background: '#FF4A24' }}>
+    <section className="relative w-full overflow-hidden" style={{ aspectRatio: '598/364' }}>
       {HERO_DATA.map((p, i) => (
         <img
           key={p.img}

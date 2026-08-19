@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 interface ProductProps {
   ctaLabel: string;
   waitlistUrl: string;
@@ -32,6 +34,7 @@ export function Product({ ctaLabel, waitlistUrl }: ProductProps) {
       />
       <h2
         className="m-0 text-center font-bold"
+        data-reveal="lines"
         style={{
           position: 'absolute',
           right: '22%',
@@ -49,39 +52,64 @@ export function Product({ ctaLabel, waitlistUrl }: ProductProps) {
       </h2>
       <p
         className="m-0 text-center"
-        style={{ position: 'absolute', right: '22%', left: '22%', top: '17.5%', color: '#FFFEE6', fontSize: '1.15vw', lineHeight: 1.3 }}
+        data-reveal="rise"
+        style={
+          {
+            position: 'absolute',
+            right: '22%',
+            left: '22%',
+            top: '17.5%',
+            color: '#FFFEE6',
+            fontSize: '1.15vw',
+            lineHeight: 1.3,
+            '--delay': '180ms',
+          } as CSSProperties
+        }
       >
         Say the wake word, get matched, talk.
         <br />
         That&apos;s the whole app.
       </p>
-      <div style={{ position: 'absolute', left: '14.5%', top: '77.5%', color: '#F4F1E4', fontSize: '1.35vw' }}>
+      <div
+        data-reveal="rise"
+        style={{ position: 'absolute', left: '14.5%', top: '77.5%', color: '#F4F1E4', fontSize: '1.35vw' }}
+      >
         01&nbsp;&nbsp;Say &quot;Hey ZolTalk&quot;
       </div>
-      <div style={{ position: 'absolute', left: '43%', top: '77.5%', color: '#F4F1E4', fontSize: '1.35vw' }}>
+      <div
+        data-reveal="rise"
+        style={{ position: 'absolute', left: '43%', top: '77.5%', color: '#F4F1E4', fontSize: '1.35vw', '--delay': '90ms' } as CSSProperties}
+      >
         02&nbsp;&nbsp;Instantly matched
       </div>
-      <div style={{ position: 'absolute', left: '78%', top: '78.5%', color: '#F4F1E4', fontSize: '1.35vw' }}>
+      <div
+        data-reveal="rise"
+        style={{ position: 'absolute', left: '78%', top: '78.5%', color: '#F4F1E4', fontSize: '1.35vw', '--delay': '180ms' } as CSSProperties}
+      >
         03&nbsp;&nbsp;Talk, then hang up
       </div>
-      <a
-        href={waitlistUrl}
-        className="font-bold"
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '84.5%',
-          transform: 'translateX(-50%)',
-          background: '#FF4A24',
-          color: '#FFFEE6',
-          fontSize: '1.75vw',
-          padding: '1.15vw 2.6vw',
-          borderRadius: 10,
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {ctaLabel}
-      </a>
+      <span style={{ position: 'absolute', left: '50%', top: '84.5%', transform: 'translateX(-50%)' }}>
+        <span
+          data-reveal="rise"
+          style={{ display: 'inline-block', '--delay': '270ms' } as CSSProperties}
+        >
+          <a
+            href={waitlistUrl}
+            className="font-bold"
+            style={{
+              display: 'inline-block',
+              background: '#FF4A24',
+              color: '#FFFEE6',
+              fontSize: '1.75vw',
+              padding: '1.15vw 2.6vw',
+              borderRadius: 10,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {ctaLabel}
+          </a>
+        </span>
+      </span>
     </section>
   );
 }

@@ -5,7 +5,11 @@ import { Method } from './components/Method';
 import { Product } from './components/Product';
 import { Ticker } from './components/Ticker';
 import { ClosingCTA } from './components/ClosingCTA';
-import { Footer } from './components/Footer';
+import { StickyFooter } from './components/StickyFooter';
+import { ScrollReveal } from './components/ScrollReveal';
+import { GradientGooFilter } from './components/GradientGooFilter';
+import { GradientBlobBackground } from './components/GradientBlobBackground';
+import { GradientBlobController } from './components/GradientBlobController';
 
 interface LaunchPageProps {
   ctaLabel?: string;
@@ -25,18 +29,24 @@ export function LaunchPage({
       className={`${abandon.className} launch-page`}
       style={{
         width: '100%',
-        overflow: 'hidden',
+        // clip-path, not overflow:hidden — overflow other than visible turns this
+        // wrapper into a scroll container, which breaks position:sticky in StickyFooter.
+        clipPath: 'inset(0)',
         background: '#000000',
         WebkitFontSmoothing: 'antialiased',
       }}
     >
+      <ScrollReveal />
+      <GradientGooFilter />
+      <GradientBlobController />
+      <GradientBlobBackground />
       <Hero start={heroStart} />
       <Premise />
       <Method />
       <Product ctaLabel={ctaLabel} waitlistUrl={waitlistUrl} />
       <Ticker show={showTicker} />
       <ClosingCTA ctaLabel={ctaLabel} waitlistUrl={waitlistUrl} />
-      <Footer />
+      <StickyFooter />
     </div>
   );
 }

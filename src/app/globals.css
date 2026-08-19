@@ -55,6 +55,30 @@
     --border-default: rgba(15, 23, 42, 0.08);
     --border-light: rgba(15, 23, 42, 0.04);
     --border-strong: rgba(15, 23, 42, 0.15);
+
+    /* Scroll-reveal motion tokens — one shared easing, per-mode duration,
+       exit runs at half the entry duration/stagger. */
+    --dur-lines: 1.15s;
+    --dur-lines-out: 0.575s;
+    --dur-rise: 0.9s;
+    --dur-rise-out: 0.45s;
+    --dur-wipe: 1.3s;
+    --dur-wipe-out: 0.65s;
+    --stagger: 75ms;
+    --stagger-out: 37ms;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --travel: 12px;
+
+    /* Gradient blob background — brand-orange base with warm accent blobs. */
+    --gb-bg1: #ff4a24;
+    --gb-bg2: #b3220b;
+    --gb-color1: 255, 244, 214;
+    --gb-color2: 255, 122, 61;
+    --gb-color3: 214, 33, 18;
+    --gb-color4: 255, 176, 59;
+    --gb-color-interactive: 255, 199, 89;
+    --gb-blend: hard-light;
+    --gb-circle-size: 80%;
   }
 
   .dark {
@@ -214,6 +238,203 @@
   }
   to {
     transform: translateY(0);
+  }
+}
+
+/* Scroll reveal system (html.js-ready gated — see ScrollReveal.tsx).
+   Three modes selected via data-reveal: "lines" | "rise" | "wipe".
+   Base rule = hidden state + out-transition. .is-in = visible state + in-transition.
+   Transitions resolve from the target state's rule, giving asymmetric in/out timing for free. */
+
+html.js-ready [data-reveal] {
+  transition-delay: var(--delay, 0s);
+}
+
+html.js-ready [data-reveal="rise"] {
+  opacity: 0;
+  transform: translateY(var(--travel));
+  transition-property: opacity, transform;
+  transition-duration: var(--dur-rise-out);
+  transition-timing-function: var(--ease);
+}
+html.js-ready [data-reveal="rise"].is-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition-duration: var(--dur-rise);
+  transition-timing-function: var(--ease);
+}
+
+html.js-ready [data-reveal="wipe"] {
+  clip-path: inset(0 0 100% 0);
+  transition-property: clip-path;
+  transition-duration: var(--dur-wipe-out);
+  transition-timing-function: var(--ease);
+}
+html.js-ready [data-reveal="wipe"].is-in {
+  clip-path: inset(0 0 0 0);
+  transition-duration: var(--dur-wipe);
+  transition-timing-function: var(--ease);
+}
+
+/* Line wrappers must not reset letter-spacing — display type here is tracked
+   -0.01em to -0.02em, and that has to survive the split. */
+html.js-ready [data-reveal="lines"] .reveal-line-outer {
+  overflow: hidden;
+  display: block;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+html.js-ready [data-reveal="lines"] .reveal-line-inner {
+  display: block;
+  transform: translateY(100%);
+  transition-property: transform;
+  transition-duration: var(--dur-lines-out);
+  transition-timing-function: var(--ease);
+  transition-delay: calc(
+    var(--delay, 0s) + (var(--n, 1) - var(--i, 0) - 1) * var(--stagger-out)
+  );
+}
+html.js-ready [data-reveal="lines"].is-in .reveal-line-inner {
+  transform: translateY(0);
+  transition-duration: var(--dur-lines);
+  transition-timing-function: var(--ease);
+  transition-delay: calc(var(--delay, 0s) + var(--i, 0) * var(--stagger));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-ready [data-reveal="rise"],
+  html.js-ready [data-reveal="wipe"],
+  html.js-ready [data-reveal="lines"] .reveal-line-inner {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+}
+
+/* Gradient blob background — see GradientBlobBackground.tsx / GradientGooFilter.tsx. */
+
+/* Fixed, not absolute — one instance pinned to the viewport, shared across
+   Hero/Method/ClosingCTA. The opaque sections between them (Premise, Product,
+   Ticker) simply paint over it, so it reads as one continuous background
+   revealed through those three sections rather than three separate ones. */
+.gradient-blob-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(40deg, var(--gb-bg1), var(--gb-bg2));
+}
+
+.gradient-blob-container {
+  filter: url(#gradient-blob-goo) blur(40px);
+  /* Render at reduced resolution, then scale up on the compositor. The filter
+     chain (SVG blur + color matrix + CSS blur) is the expensive part of this
+     effect and isn't well GPU-accelerated in most browsers — since it runs
+     continuously on a full-viewport fixed layer, that cost is constant, not
+     just while the mouse moves. Blurred output looks the same from fewer
+     source pixels, so this cuts the filter's pixel-processing cost by ~65%
+     with no visible difference.
+     width/height (60%) and the scale factor (1 / 0.6) must stay reciprocal. */
+  width: 60%;
+  height: 60%;
+  transform: scale(1.6667);
+  transform-origin: top left;
+  will-change: transform;
+}
+
+.gradient-blob {
+  position: absolute;
+  width: var(--gb-circle-size);
+  height: var(--gb-circle-size);
+  top: calc(50% - var(--gb-circle-size) / 2);
+  left: calc(50% - var(--gb-circle-size) / 2);
+  mix-blend-mode: var(--gb-blend);
+  transform-origin: center center;
+}
+
+.gradient-blob--1 {
+  background: radial-gradient(circle at center, rgba(var(--gb-color1), 0.8) 0, rgba(var(--gb-color1), 0) 50%);
+  animation: gradient-blob-vertical 30s ease infinite;
+}
+
+.gradient-blob--2 {
+  background: radial-gradient(circle at center, rgba(var(--gb-color2), 0.8) 0, rgba(var(--gb-color2), 0) 50%);
+  transform-origin: calc(50% - 20%) 50%;
+  animation: gradient-blob-circle 20s reverse infinite;
+}
+
+.gradient-blob--3 {
+  background: radial-gradient(circle at center, rgba(var(--gb-color3), 0.8) 0, rgba(var(--gb-color3), 0) 50%);
+  top: calc(50% - var(--gb-circle-size) / 2 + 10%);
+  left: calc(50% - var(--gb-circle-size) / 2 - 15%);
+  transform-origin: calc(50% + 20%) 50%;
+  animation: gradient-blob-circle 40s linear infinite;
+}
+
+.gradient-blob--4 {
+  background: radial-gradient(circle at center, rgba(var(--gb-color4), 0.8) 0, rgba(var(--gb-color4), 0) 50%);
+  transform-origin: calc(50% - 10%) 50%;
+  animation: gradient-blob-horizontal 40s ease infinite;
+  opacity: 0.7;
+}
+
+.gradient-blob--interactive {
+  width: 100%;
+  height: 100%;
+  top: -50%;
+  left: -50%;
+  opacity: 0.7;
+  background: radial-gradient(
+    circle at center,
+    rgba(var(--gb-color-interactive), 0.8) 0,
+    rgba(var(--gb-color-interactive), 0) 50%
+  );
+}
+
+.gradient-blob-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes gradient-blob-vertical {
+  0%,
+  100% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+}
+
+@keyframes gradient-blob-circle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradient-blob-horizontal {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-blob {
+    animation: none !important;
   }
 }
 
