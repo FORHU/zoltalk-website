@@ -8,7 +8,6 @@ const footerLinks = [
   { label: 'Vision', href: '/#vision' },
   { label: 'Technical details', href: '/product' },
 ];
-const socials = ['LinkedIn', 'Instagram', 'X'];
 
 export function Footer() {
   return (
@@ -36,28 +35,18 @@ export function Footer() {
           hello@zoltalk.app
         </a>
 
-        <div className="mt-10 border-t border-zt-line-dark pt-10 flex flex-col md:flex-row md:items-start md:justify-between gap-10">
-          <div className="grid grid-cols-2 gap-10">
-            <div>
-              <p className="font-zt-utility text-xs uppercase tracking-[0.08em] text-zt-white/50 mb-1">Built for</p>
-              <p className="text-zt-white/80 font-zt-body">
-                Anyone traveling alone or hands-free — drivers, commuters, walkers, and travelers who&apos;d rather talk than stare at a screen.
-              </p>
-            </div>
-            <div>
-              <p className="font-zt-utility text-xs uppercase tracking-[0.08em] text-zt-white/50 mb-1">Privacy first</p>
-              <p className="text-zt-white/80 font-zt-body">
-                No personal info, no location, one connection at a time. Always your choice to accept or decline.
-              </p>
-            </div>
+        <div className="mt-10 border-t border-zt-line-dark pt-10 grid grid-cols-2 gap-10">
+          <div>
+            <p className="font-zt-utility text-xs uppercase tracking-[0.08em] text-zt-white/50 mb-1">Built for</p>
+            <p className="text-zt-white/80 font-zt-body">
+              Anyone traveling alone or hands-free — drivers, commuters, walkers, and travelers who&apos;d rather talk than stare at a screen.
+            </p>
           </div>
-
-          <div className="flex flex-col gap-2 shrink-0">
-            {socials.map((social) => (
-              <a key={social} href="#" className="text-zt-white/60 hover:text-zt-white font-zt-body transition-colors">
-                {social}
-              </a>
-            ))}
+          <div>
+            <p className="font-zt-utility text-xs uppercase tracking-[0.08em] text-zt-white/50 mb-1">Privacy first</p>
+            <p className="text-zt-white/80 font-zt-body">
+              No personal info, no location, one connection at a time. Always your choice to accept or decline.
+            </p>
           </div>
         </div>
 
@@ -67,8 +56,6 @@ export function Footer() {
           </h2>
 
           <div className="flex items-center gap-6">
-            <a href="#" className="text-zt-white/50 hover:text-zt-white font-zt-body text-sm transition-colors">Privacy policy</a>
-            <a href="#" className="text-zt-white/50 hover:text-zt-white font-zt-body text-sm transition-colors">Terms</a>
             <div className="flex flex-col items-center gap-1 rounded-2xl bg-zt-white p-3">
               <QrCode className="h-10 w-10 text-zt-ink" strokeWidth={1.5} />
               <span className="text-zt-ink font-zt-utility text-[10px] uppercase tracking-[0.06em]">Coming soon</span>
