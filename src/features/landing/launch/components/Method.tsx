@@ -91,7 +91,7 @@ export function Method() {
   return (
     <section
       className="method-section"
-      style={{ position: 'relative', width: '100%', aspectRatio: '1500/1000', overflow: 'hidden', background: '#FF4A24' }}
+      style={{ position: 'relative', width: '100%', aspectRatio: '1500/1000', overflow: 'hidden' }}
     >
       <img
         key={`${photoIdx}-${photoSide}`}

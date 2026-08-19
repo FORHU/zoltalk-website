@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { Loader2, CheckCircle2 } from 'lucide-react';
 import { useJoinWaitlist } from '@/features/landing/hooks/waitlist.hooks';
 
@@ -31,13 +31,28 @@ export function ClosingCTA({ ctaLabel }: ClosingCTAProps) {
     <section
       id="waitlist"
       className="relative overflow-hidden"
-      style={{ background: '#FF4A24', minHeight: '56vw', display: 'flex', alignItems: 'center' }}
+      style={{ minHeight: '56vw', display: 'flex', alignItems: 'center' }}
     >
       <div style={{ position: 'relative', zIndex: 1, padding: '5.5vw 5.2% 6.5vw', maxWidth: '52%' }}>
-        <h2 className="font-bold" style={{ color: '#FFFEE6', fontSize: 'clamp(30px, 5.7vw, 86px)', margin: 0, letterSpacing: '-0.015em', lineHeight: 1 }}>
+        <h2
+          className="font-bold"
+          data-reveal="lines"
+          style={{ color: '#FFFEE6', fontSize: 'clamp(30px, 5.7vw, 86px)', margin: 0, letterSpacing: '-0.015em', lineHeight: 1 }}
+        >
           Find your voice.
         </h2>
-        <p style={{ color: '#FFFEE6', fontSize: 'clamp(13px, 1.85vw, 27px)', lineHeight: 1.35, margin: '1.8vw 0 0' }}>
+        <p
+          data-reveal="rise"
+          style={
+            {
+              color: '#FFFEE6',
+              fontSize: 'clamp(13px, 1.85vw, 27px)',
+              lineHeight: 1.35,
+              margin: '1.8vw 0 0',
+              '--delay': '180ms',
+            } as CSSProperties
+          }
+        >
           Say the words.
           <br />
           Someone, somewhere, is already listening.
@@ -59,7 +74,11 @@ export function ClosingCTA({ ctaLabel }: ClosingCTAProps) {
             You&apos;re on the list.
           </div>
         ) : (
-          <form onSubmit={handleSubmit} style={{ marginTop: '3vw' }}>
+          <form
+            onSubmit={handleSubmit}
+            data-reveal="rise"
+            style={{ marginTop: '3vw', '--delay': '270ms' } as CSSProperties}
+          >
             <div className="flex flex-wrap" style={{ gap: '0.8vw' }}>
               <input
                 type="email"
