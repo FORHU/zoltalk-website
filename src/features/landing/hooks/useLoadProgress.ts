@@ -2,14 +2,11 @@
 
 import { RefObject, useEffect, useState } from 'react';
 
-const MIN_DURATION_MS = 5000;
-
 export function useLoadProgress(containerRef: RefObject<HTMLElement | null>) {
   const [progress, setProgress] = useState(0);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const start = Date.now();
     const images = containerRef.current ? Array.from(containerRef.current.querySelectorAll('img')) : [];
     const total = images.length;
     let loaded = 0;
@@ -20,8 +17,7 @@ export function useLoadProgress(containerRef: RefObject<HTMLElement | null>) {
       if (finished || !windowLoaded || loaded < total) return;
       finished = true;
       setProgress(100);
-      const remaining = Math.max(0, MIN_DURATION_MS - (Date.now() - start));
-      setTimeout(() => setReady(true), remaining);
+      setReady(true);
     };
 
     const handleImageSettled = () => {

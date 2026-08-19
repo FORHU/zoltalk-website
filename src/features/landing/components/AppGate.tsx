@@ -35,12 +35,12 @@ export function AppGate() {
 
   return (
     <>
-      <div ref={containerRef} aria-hidden={!siteVisible}>
+      <div ref={containerRef} aria-hidden={!siteVisible} style={{ isolation: 'isolate' }}>
         <LaunchPage heroStart={heroStart} />
       </div>
 
       <div
-        className={`transition-opacity duration-300 ${siteVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        className={`relative z-50 transition-opacity duration-300 ${siteVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
       >
         <LoadingSequence progress={progress} phase={phase} onExpandComplete={handleExpandComplete} />
       </div>
