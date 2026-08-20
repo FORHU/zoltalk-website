@@ -79,6 +79,7 @@
     --gb-color-interactive: 255, 199, 89;
     --gb-blend: hard-light;
     --gb-circle-size: 80%;
+    --gb-reveal-duration: 2.5s;
   }
 
   .dark {
@@ -317,12 +318,29 @@ html.js-ready [data-reveal="lines"].is-in .reveal-line-inner {
 /* Fixed, not absolute — one instance pinned to the viewport, shared across
    Hero/Method/ClosingCTA. The opaque sections between them (Premise, Product,
    Ticker) simply paint over it, so it reads as one continuous background
-   revealed through those three sections rather than three separate ones. */
+   revealed through those three sections rather than three separate ones.
+   The base fill is plain brand orange — the blob layer cross-fades in over
+   it once `reveal` goes true (see GradientBlobBackground.tsx), so first
+   paint reads as the old flat orange before the gradient settles in. */
 .gradient-blob-bg {
   position: fixed;
   inset: 0;
   overflow: hidden;
+  background: var(--gb-bg1);
+}
+
+/* The diagonal two-stop gradient, as its own layer — background-image can't
+   be transitioned directly, so this fades in over the flat base instead. */
+.gradient-blob-base {
+  position: absolute;
+  inset: 0;
   background: linear-gradient(40deg, var(--gb-bg1), var(--gb-bg2));
+  opacity: 0;
+  transition: opacity var(--gb-reveal-duration) ease-out;
+}
+
+.gradient-blob-base.is-visible {
+  opacity: 1;
 }
 
 .gradient-blob-container {
@@ -339,7 +357,13 @@ html.js-ready [data-reveal="lines"].is-in .reveal-line-inner {
   height: 60%;
   transform: scale(1.6667);
   transform-origin: top left;
-  will-change: transform;
+  will-change: transform, opacity;
+  opacity: 0;
+  transition: opacity var(--gb-reveal-duration) ease-out;
+}
+
+.gradient-blob-container.is-visible {
+  opacity: 1;
 }
 
 .gradient-blob {
@@ -394,10 +418,15 @@ html.js-ready [data-reveal="lines"].is-in .reveal-line-inner {
 .gradient-blob-grain {
   position: absolute;
   inset: 0;
-  opacity: 0.06;
+  opacity: 0;
   mix-blend-mode: overlay;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  transition: opacity var(--gb-reveal-duration) ease-out;
+}
+
+.gradient-blob-grain.is-visible {
+  opacity: 0.06;
 }
 
 @keyframes gradient-blob-vertical {
@@ -435,6 +464,12 @@ html.js-ready [data-reveal="lines"].is-in .reveal-line-inner {
 @media (prefers-reduced-motion: reduce) {
   .gradient-blob {
     animation: none !important;
+  }
+
+  .gradient-blob-base,
+  .gradient-blob-container,
+  .gradient-blob-grain {
+    transition: none !important;
   }
 }
 

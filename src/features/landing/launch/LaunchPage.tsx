@@ -39,7 +39,7 @@ export function LaunchPage({
       <ScrollReveal />
       <GradientGooFilter />
       <GradientBlobController />
-      <GradientBlobBackground />
+      <GradientBlobBackground reveal={heroStart} />
       <Hero start={heroStart} />
       <Premise />
       <Method />
